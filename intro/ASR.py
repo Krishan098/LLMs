@@ -3,11 +3,12 @@ Automatic Speech Recognition converts a speech signal to text, mapping a sequenc
 '''
 from datasets import load_dataset, Audio
 from huggingface_hub import login
-
+import datasets
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv 
 load_dotenv()
-login(token=os.getenv("HUGGINGFACE_API_KEY"),add_to_git_credential=True)
+login(token=os.getenv("HF_TOKEN"),add_to_git_credential=True)
+datasets.config.USE_TORCH = False
 minds=load_dataset("PolyAI/minds14",name="en-US",split="train[:100]")
 minds=minds.train_test_split(test_size=0.2)
 #print(minds)
@@ -39,10 +40,8 @@ def prepare_dataset(batch):
     batch["input_length"]=len(batch["input_values"][0])
     return batch
 
-if __name__ == "__main__":
-    encoded_minds=minds.map(prepare_dataset,remove_columns=minds.column_names["train"],num_proc=4)
-else:
-    encoded_minds=minds.map(prepare_dataset,remove_columns=minds.column_names["train"])
+
+encoded_minds=minds.map(prepare_dataset,remove_columns=minds.column_names["train"])
 
 '''Data collators are objects that will form a batch by using a list of dataset elements as input. 
 These elements are of the same type as the elements of train or eval dataset. To build batches they may apply padding.
