@@ -207,3 +207,6 @@ marimo/_lsp/
 __marimo__/
 tutor.html
 /ffmpeg/
+
+TokenClassifierModel/
+qa_model/
