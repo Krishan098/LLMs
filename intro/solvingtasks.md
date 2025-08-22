@@ -16,7 +16,7 @@
 
 1. **Masked Language Modeling**: USed by encoder models like BERT, this approach randomly masks some tokens in the input and trains the model to predict the original tokens based on the surrounding context. This allows the models to learn bidirectional context(looking at words both before and after the masked word).
 
-2. **Casual Language Modeling**: Used by decoder models like GPT, this approach predicts the next token based on all previous tokens in the sequence. The model can only use context from the left(previous tokens) to predict the next token.
+2. **Causal Language Modeling**: Used by decoder models like GPT, this approach predicts the next token based on all previous tokens in the sequence. The model can only use context from the left(previous tokens) to predict the next token.
 
 ## Types of Language models
 
