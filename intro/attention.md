@@ -28,7 +28,7 @@
 
 - Here, the encoder maps an input sequence of symbol representations $(x_1,\ldots,x_{\text{n}})$ to a sequence of continuous representations $z=(z_1,\ldots,z_{\text{n}})$. Given z, the decoder then generates an output sequence $(y_1,\ldots,y_{\text{m}})$ of symbols one element at a time. At eeach step the model is auto-regressive, consuming the previously generated symbols as additional input when generating the next.
 
-![alt text](image.png)
+![alt text](images\image.png)
 
 ## Encoder and Decoder Stacks
 
@@ -40,7 +40,7 @@
 
 - An attention function can be described as mapping a query and a set of key-value pairs to an output, where the query,key, values and output are all vectors. The output is computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key.
 
-![alt text](image-1.png)
+![alt text](images\image-1.png)
 
 ## Scaled Dot-Product Attention
 
@@ -98,7 +98,7 @@ $$
 
 - In the embedding layers, we multiply those weights by $\sqrt{d_{\text{model}}}$.
 
-![alt text](image-2.png)
+![alt text](images\image-2.png)
 
 ## Positional encodings
 
@@ -130,4 +130,4 @@ where pos is the position and i is the dimension. That is, each dimension of the
 
 - As a side benefit, self-attention could yield more interpretable models. 
 
-![alt text](image-3.png)
+![alt text](images\image-3.png)
