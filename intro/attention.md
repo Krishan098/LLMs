@@ -98,7 +98,7 @@ $$
 
 - In the embedding layers, we multiply those weights by $\sqrt{d_{\text{model}}}$.
 
-![alt text](images\image-2.png)
+![alt text](\images\image-2.png)
 
 ## Positional encodings
 
@@ -106,10 +106,13 @@ $$
 
 - We used sine and cosine funcctions of different frequencies:
 
-$$
-PE_{\text{(pos,2i)}}= sin(pos\div{10000}^{\text{2i/d_{\text{model}}}})\cr
-PE_{\text{(pos,2i+1)}}=cos(pos\div{10000}^{\text{2i/d_{\text{model}}}})
-$$
+\[
+PE_{(pos,2i)} = \sin\!\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)
+\]
+\[
+PE_{(pos,2i+1)} = \cos\!\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)
+\]
+
 
 where pos is the position and i is the dimension. That is, each dimension of the positional encoding corresponds to a sinusoid. The wavelengths form a geometric progression from $2\pi$ to 10000.$2\pi$. 
 
