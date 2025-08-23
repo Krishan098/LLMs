@@ -123,7 +123,8 @@ $$
 $$
 PE_{(pos,2i+1)} = \cos\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)
 $$
-where pos is the position and i is the dimension. That is, each dimension of the positional encoding corresponds to a sinusoid. The wavelengths form a geometric progression from $2\pi$ to $1000.2\pi$. 
+
+- where pos is the position and i is the dimension. That is, each dimension of the positional encoding corresponds to a sinusoid. The wavelengths form a geometric progression from $2\pi$ to $1000.2\pi$. 
 
 - Sine allows the model to explorate to sequence lengths longer than the ones encountered during training.
 
