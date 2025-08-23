@@ -64,23 +64,21 @@ $$
 
 - Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions. With a single attention head, averaging inhabits this.
 
+
 $$
-\[
 \text{MultiHead}(Q,K,V) = \text{Concat}(head_1, \ldots, head_h) W^{O}
-\]
+$$
 
+$$
+head_i = \text{Attention}(Q W_i^{Q},\, K W_i^{K},\, V W_i^{V})
+$$
 
-\text{where } head_i = \text{Attention}(Q W_i^{Q},\, K W_i^{K},\, V W_i^{V})
-\
-\[
-\text{with parameter matrices } 
+$$
 W_i^{Q} \in \mathbb{R}^{d_{\text{model}} \times d_k},\,
 W_i^{K} \in \mathbb{R}^{d_{\text{model}} \times d_k},\,
 W_i^{V} \in \mathbb{R}^{d_{\text{model}} \times d_v},\,
-W^{O} \in \mathbb{R}^{h d_v \times d_{\text{model}}}.
-\]
+W^{O} \in \mathbb{R}^{h d_v \times d_{\text{model}}}
 $$
-
 
 - In this work we employ h = 8 parallel attention layers or heads. For each of these we use dk = dv = dmodel/h = 64. Due to the reduced dimension of each head, the total computational cost is similar to that of single-head attention with full dimensionality.
 
@@ -117,11 +115,12 @@ $$
 - We used sine and cosine funcctions of different frequencies:
 
 $$
-[PE_{(pos,2i)} = \sin\!\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)]
-
-[PE_{(pos,2i+1)} = \cos\!\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)]
+PE_{(pos,2i)} = \sin\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)
 $$
 
+$$
+PE_{(pos,2i+1)} = \cos\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)
+$$
 where pos is the position and i is the dimension. That is, each dimension of the positional encoding corresponds to a sinusoid. The wavelengths form a geometric progression from $2\pi$ to $1000.2\pi$. 
 
 - Sine allows the model to explorate to sequence lengths longer than the ones encountered during training.
