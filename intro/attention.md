@@ -73,6 +73,7 @@ $$
 head_i = \text{Attention}(Q W_i^{Q},\, K W_i^{K},\, V W_i^{V})
 $$
 - where tthe projections are parameter matrices:
+
 $$
 W_i^{Q} \in \mathbb{R}^{d_{\text{model}} \times d_k},\,
 W_i^{K} \in \mathbb{R}^{d_{\text{model}} \times d_k},\,
@@ -118,6 +119,7 @@ $$
 PE_{(pos,2i)} = \sin\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)
 $$
 - and:
+
 $$
 PE_{(pos,2i+1)} = \cos\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)
 $$
