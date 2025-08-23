@@ -30,7 +30,7 @@
 
 - GPT-2 is a decoder-only model pretrained on a large amount of text. It can generate convincing text given a prompt and complete other NLP taks like question answering despite not being explicitly trained to.
 
-![alt text](images\image-5.png)
+![alt text](images/image-5.png)
 
 1. GPT-2 uses _byte pair encoding_ to tokenize words and generate a token embedding. Positional encodings are addded to the token embeddings to indicate the position of each token in the sequence. The input embeddings are passed through multiple decoder blocks to output some final hidden state. Within each decoder block, GPT-2 uses a masked self-attention layer which means GPT-2 can't attend to future tokens. It is only allowed to attend to tokens on the left. This is different from BERT's[mask] token because, in masked self-attention, an attention mask is used to set the score to 0 for future tokens.
 
@@ -68,7 +68,7 @@
 
 - Encoder-decoder models such as BART and T5 are designed for the sequence-to-sequence pattern of a summarization task.
 
-![](images\image-6.png)
+![](images/image-6.png)
 
 1. BART's encoder architecture is very similar to BERT and accepts a token and positional embedding of the text. BART is pretrained by corrupting the input and then reconstructing it with the decoder. Unlike other encoders with specific corruption strategies, BART can apply any type of corruption.
 
@@ -88,7 +88,7 @@
 
 - The decoder allows whisper to map the encoders learned speech representations to useful outputs, such as text, without additional fine-tuning.
 
-![alt text](images\image-7.png)
+![alt text](images/image-7.png)
 
 - 2 main components:
     1. An encoder processes the input audio. The raw audio is first converted into a log-Mel spectrogram.This spectrogram is then passed through a Transformer encoder network.
