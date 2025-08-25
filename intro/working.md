@@ -57,7 +57,7 @@ models=api.list_models(emissions_thresholds=(None,100),cardData=True)
 
 - To speed things up during training(when the model has access to target sentences), the decoder is fed the whole target, but it is not allowed to use future words.
 
-![alt text](image-4.png)
+![alt text](images/image-4.png)
 
 - The first attention layer in a decoder block pays attention to all inputs to the decoder, but the second attention layer uses the output of the encoder. It can thus access the whole input sentence to best predict the current word. 
 

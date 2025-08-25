@@ -28,7 +28,7 @@
 
 - Here, the encoder maps an input sequence of symbol representations $(x_1,\ldots,x_{\text{n}})$ to a sequence of continuous representations $z=(z_1,\ldots,z_{\text{n}})$. Given z, the decoder then generates an output sequence $(y_1,\ldots,y_{\text{m}})$ of symbols one element at a time. At eeach step the model is auto-regressive, consuming the previously generated symbols as additional input when generating the next.
 
-![alt text](image.png)
+![alt text](images/image.png)
 
 ## Encoder and Decoder Stacks
 
@@ -40,7 +40,7 @@
 
 - An attention function can be described as mapping a query and a set of key-value pairs to an output, where the query,key, values and output are all vectors. The output is computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key.
 
-![alt text](image-1.png)
+![alt text](images/image-1.png)
 
 ## Scaled Dot-Product Attention
 
@@ -64,13 +64,22 @@ $$
 
 - Multi-head attention allows the model to jointly attend to information from different representation subspaces at different positions. With a single attention head, averaging inhabits this.
 
-$$
-MultiHead(Q,K,V)= Concat(head_1,\ldots,head_{\text{h}})W^{\text{O}}\cr
-$$
-where $ head_{\text{i}}=Attention(Q{W_{\text{i}}}^{\text{Q}},K{W_{\text{i}}}^{\text{K}},V{W_{\text{i}}}^{\text{V}})$
 
-where the projections are paramter matrices ${W_{\text{i}}}^{\text{Q}}\epsilon R^{\text{d_{\text{model}}xd_{\text{k}}}}$, ${W_{\text{i}}}^{\text{K}}\epsilon R^{\text{d_{\text{model}}xd_{\text{k}}}}$,${W_{\text{i}}}^{\text{V}}\epsilon R^{\text{d_{\text{model}}xd_{\text{v}}}}$, and ${W}^{\text{O}}\epsilon R^{\text{hd_{\text{v}}}xd_{\text{model}}}$.
+$$
+\text{MultiHead}(Q,K,V) = \text{Concat}(head_1, \ldots, head_h) W^{O}
+$$
 
+$$
+head_i = \text{Attention}(Q W_i^{Q},\, K W_i^{K},\, V W_i^{V})
+$$
+- where tthe projections are parameter matrices:
+
+$$
+W_i^{Q} \in \mathbb{R}^{d_{\text{model}} \times d_k},\,
+W_i^{K} \in \mathbb{R}^{d_{\text{model}} \times d_k},\,
+W_i^{V} \in \mathbb{R}^{d_{\text{model}} \times d_v},\,
+W^{O} \in \mathbb{R}^{h d_v \times d_{\text{model}}}
+$$
 
 - In this work we employ h = 8 parallel attention layers or heads. For each of these we use dk = dv = dmodel/h = 64. Due to the reduced dimension of each head, the total computational cost is similar to that of single-head attention with full dimensionality.
 
@@ -98,7 +107,7 @@ $$
 
 - In the embedding layers, we multiply those weights by $\sqrt{d_{\text{model}}}$.
 
-![alt text](image-2.png)
+![alt text](images/image-2.png)
 
 ## Positional encodings
 
@@ -107,11 +116,15 @@ $$
 - We used sine and cosine funcctions of different frequencies:
 
 $$
-PE_{\text{(pos,2i)}}= sin(pos\div{10000}^{\text{2i/d_{\text{model}}}})\cr
-PE_{\text{(pos,2i+1)}}=cos(pos\div{10000}^{\text{2i/d_{\text{model}}}})
+PE_{(pos,2i)} = \sin\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)
+$$
+- and:
+
+$$
+PE_{(pos,2i+1)} = \cos\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)
 $$
 
-where pos is the position and i is the dimension. That is, each dimension of the positional encoding corresponds to a sinusoid. The wavelengths form a geometric progression from $2\pi$ to 10000.$2\pi$. 
+- where pos is the position and i is the dimension. That is, each dimension of the positional encoding corresponds to a sinusoid. The wavelengths form a geometric progression from $2\pi$ to $1000.2\pi$. 
 
 - Sine allows the model to explorate to sequence lengths longer than the ones encountered during training.
 
@@ -130,4 +143,4 @@ where pos is the position and i is the dimension. That is, each dimension of the
 
 - As a side benefit, self-attention could yield more interpretable models. 
 
-![alt text](image-3.png)
+![alt text](images/image-3.png)
