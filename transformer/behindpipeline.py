@@ -55,13 +55,15 @@ raw_inputs=["I've been waiting for a HuggingFace course my whole life to be a di
      "You are always so nice to me,I hate this so much"]
 input=tokenizer(raw_inputs,padding=True,truncation=True,return_tensors="pt")
 #print(input)
-input_ids=input['input_ids']
+#input_ids=input['input_ids']
 #print(len(i) for i in input_ids)
-
+#decoded=tokenizer.decode(input['input_ids'])
+#print(decoded)
 '''
 The output is a dict containing 2 keys: 
     - input_ids: contains 2 rows of integers(one for each sentence)
-    - attention_mask:
+    - token_type_ids: These tell the model which part of the input is sentence A and which is sentence B
+    - attention_mask: this indicates which tokens should be attended to and which should not.
 '''
 
 from transformers import AutoModel
