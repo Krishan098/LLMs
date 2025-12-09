@@ -65,7 +65,19 @@ come from two different documents.
 def tokenize_function(example):
     return tokenizer(example["sentence1"],example["sentence2"],truncation=True)
 
-tokenized_datasets=raw_datasets.map(tokenize_function,batched=True)
+tokenized_datasets=raw_datasets.map(tokenize_function,batched=True,num_proc=4)
 print(tokenized_datasets)
 
-"""The function that is responsible for putting together samples inside a batch is called a collate function."""
+'''DYNAMIC PADDING: pad all the examples to the length of the longest element when we batch elements together.'''
+
+"""The function that is responsible for putting together samples inside a batch is called a collate function.
+It's an argument we can pass when we build a DataLoader, the default being a function that will just convert our samples to PyTorch tensors and concatenate them.
+"""
+
+### TPUs prefer fixed shapes, even if it requires extra padding.
+
+
+
+from transformers import DataCollatorWithPadding
+
+data_collator=DataCollatorWithPadding(tokenizer=tokenizer)
