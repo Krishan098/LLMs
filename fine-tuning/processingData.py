@@ -65,7 +65,7 @@ come from two different documents.
 def tokenize_function(example):
     return tokenizer(example["sentence1"],example["sentence2"],truncation=True)
 
-tokenized_datasets=raw_datasets.map(tokenize_function,batched=True,num_proc=4)
+tokenized_datasets=raw_datasets.map(tokenize_function,batched=True)
 print(tokenized_datasets)
 
 '''DYNAMIC PADDING: pad all the examples to the length of the longest element when we batch elements together.'''
@@ -81,3 +81,11 @@ It's an argument we can pass when we build a DataLoader, the default being a fun
 from transformers import DataCollatorWithPadding
 
 data_collator=DataCollatorWithPadding(tokenizer=tokenizer)
+
+samples=tokenized_datasets["train"][:8]
+samples={k:v for k, v in samples.items() if k not in ["idx","sentence1","sentence2"]}
+print([len(x) for x in samples["input_ids"]])
+
+
+batch=data_collator(samples)
+print({k:v.shape for k,v in batch.items()})
